@@ -4,10 +4,10 @@
  */
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
+import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** 
  * Class MatrixReader qui permet de lire un fichier de problèmes.
@@ -74,7 +74,6 @@ class MatrixReader {
         Pattern pattern = Pattern.compile(MATRIX_PATTERN);
 
         for (String mat : stringMatrix) {
-            System.out.println(mat);
             Matcher matcher = pattern.matcher(mat);
             if (matcher.matches()) {
                 try {

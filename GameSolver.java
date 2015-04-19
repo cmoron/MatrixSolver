@@ -15,5 +15,5 @@ interface GameSolver {
      * @param game le problème à résoudre.
      * @return la liste des solutions.
      */
-    public List<Solution> solve(MatrixSolver game);
+    public List<Solution> solve(MatrixGame game);
 }
