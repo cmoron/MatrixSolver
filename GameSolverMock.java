@@ -17,8 +17,8 @@ class GameSolverMock implements GameSolver {
      * @param MatrixSolver le problème à résoudre.
      * @return la liste de solution
      */
-    public List<Solution> solve(MatrixGame game) {
-        List<Solution> solutions = new ArrayList<Solution>();
+    public List<List<Solution>> solve(MatrixGame game) {
+        List<List<Solution>> solutions = new ArrayList<List<Solution>>();
 
         Matrix targetMatrix = game.getTargetMatrix();
 
@@ -26,11 +26,14 @@ class GameSolverMock implements GameSolver {
             Thread.sleep(500);
         } catch (Exception e) {
         }
+
         for (Matrix matrixToSolve : game.getMatrixList()) {
+            List<Solution> matrixSolutions = new ArrayList<Solution>();
             Solution solution = new Solution();
             solution.addStep(matrixToSolve);
             solution.addStep(targetMatrix);
-            solutions.add(solution);
+            matrixSolutions.add(solution);
+            solutions.add(matrixSolutions);
         }
 
         return solutions;

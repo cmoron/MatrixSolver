@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -69,7 +70,8 @@ class MatrixGame {
      */
     private static void launchSolvingProblem(MatrixGame matrixGame, GameSolver solver) {
         long startTime = System.currentTimeMillis();
-        List<Solution> solutions = solver.solve(matrixGame);
+        List<List<Solution>> solutions = new ArrayList<List<Solution>>();
+        solutions = solver.solve(matrixGame);
         long endTime = System.currentTimeMillis();
         long executionTime = endTime - startTime;
         String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
@@ -79,13 +81,22 @@ class MatrixGame {
         try {
             writer = new BufferedWriter(new FileWriter(logFile));
             writer.write("==== Execution time: " + executionTime + "\n");
-            for (Solution solution : solutions) {
-                writer.write(solution.toString());
+            for (List<Solution> matrixSolutions : solutions) {
+                if (null != matrixSolutions && null != matrixSolutions.get(0)) {
+                    Solution firstSolution = matrixSolutions.get(0);
+                    writer.write("\n\n-------------------\n");
+                    writer.write(" Solutions for matrix: " + firstSolution.getStartMatrix());
+                    writer.write("-------------------\n");
+                }
+                for (Solution solution : matrixSolutions) {
+                    writer.write(solution.toString());
+                }
             }
         } catch (Exception exc) {
             exc.printStackTrace();
         } finally {
             try {
+                System.out.println("Results file " + logFile.getName() + " produced.");
                 writer.close();
             } catch (Exception exc) {
                 exc.printStackTrace();

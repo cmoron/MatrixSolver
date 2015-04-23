@@ -50,6 +50,14 @@ class Solution {
     }
 
     /** 
+     * Retourne la matrice de départ.
+     * @return la première matrice.
+     */
+    public Matrix getStartMatrix() {
+        return this.steps.get(0);
+    }
+
+    /** 
      * Nombre de steps de la solution.
      * @return le nombre de steps.
      */
